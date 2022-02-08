@@ -25,29 +25,28 @@ function HomePage(){
         control = sessionUser.id;
     }
 
-   console.log(showModal)
-
     return (
         <div>
             {story.map((st)=>{
                 return (
-                    <NavLink to={`/login`} key={st.id} className="story">
+                    <div>
+
                         <i className="fas fa-user-circle" />
                         <div>
-                            <p>{st.title}</p>
+                            <NavLink to={`/login`} key={st.id}>{st.title}</NavLink>
                             <p>{st.body}</p>
                             {st.authorId === control && (
-                                
-                                    <button onClick={() => setShowModal(true)}>EDIT</button>
                                     
-                            )}
-                            {showModal && (
-                                        <Modal onClose={() => setShowModal(false)}>
-                                            <StoryFrom st={st} />
-                                        </Modal>
+                                <button onClick={() => setShowModal(true)}>EDIT</button>
+                                        
                             )}
                         </div>
-                    </NavLink>
+                        {showModal && (
+                            <Modal onClose={() => setShowModal(false)}>
+                                <StoryFrom st={st} hide={()=> setShowModal(false)} />
+                            </Modal>
+                        )}
+                    </div>
                 )
             })}
         </div>

@@ -1,13 +1,16 @@
 import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editStory } from '../../store/story';
+import { useHistory } from "react-router-dom";
 
-function StoryFrom({ st }){
+function StoryFrom({ st, hide}){
     const sessionUser = useSelector(state => state.session.user);
-    const [title, setTitle]= useState(st.title || '');
-    const [body, setBody]= useState(st.body || '');
+    const [title, setTitle]= useState(st.title);
+    const [body, setBody]= useState(st.body);
     const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
+    const history = useHistory();
+    // console.log(st);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,8 +21,13 @@ function StoryFrom({ st }){
             body
         }
         console.log(obj)
-        return dispatch(editStory(obj))
+        dispatch(editStory(obj))
+        history.push('/')
       }
+
+    const handleStop=(e)=>{
+        hide();
+    }
     
     return (
         <div>
@@ -29,7 +37,7 @@ function StoryFrom({ st }){
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label>
-          Username or Email
+          Title
           <input
             id='title'
             type="text"
@@ -39,7 +47,7 @@ function StoryFrom({ st }){
           />
         </label>
         <label>
-          Password
+          Body
           <input
             id='body'
             type="text"
@@ -49,7 +57,7 @@ function StoryFrom({ st }){
           />
         </label>
         <button type="submit">Done</button>
-        {/* <button onClick={handleDemo}>Can</button> */}
+        <button onClick={handleStop}>Cancel</button>
       </form>
     </div>
     )
