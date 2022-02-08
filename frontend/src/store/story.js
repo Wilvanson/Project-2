@@ -3,7 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD_STORIES = 'story/loadStories';
 const ADD_STORIES = 'story/addStories';
 const REMOVE_STORIES = 'story/removeStories';
-const EDIT_STORIES = 'story/editStories';
+// const EDIT_STORIES = 'story/editStories';
 
 const loadStories = list => {
     return {
@@ -19,19 +19,19 @@ const addStories = list => {
     };
 };
 
-const removeStories = id => {
-    return {
-      type: REMOVE_STORIES,
-      id
-    };
-};
+// const removeStories = id => {
+//     return {
+//       type: REMOVE_STORIES,
+//       id
+//     };
+// };
 
-const editStories = list => {
-    return {
-      type: ADD_STORIES,
-      list
-    };
-};
+// const editStories = list => {
+//     return {
+//       type: ADD_STORIES,
+//       list
+//     };
+// };
 
 export const getStories = () => async dispatch => {
     const response = await csrfFetch(`/api/stories`);
@@ -66,7 +66,7 @@ export const getStories = () => async dispatch => {
   
     if (response.ok) {
       const story = await response.json();
-      dispatch(editStories(story));
+      dispatch(addStories(story));
       return story;
     }
   };
@@ -91,12 +91,25 @@ const storyReducer = (state = initialState, action) => {
         list: action.list
       }
     case ADD_STORIES:
-    //   newState = Object.assign({}, state);
-    //   newState.user = null;
+      if (!state[action.story.id]) {
+        const newState = {
+          ...state,
+          [action.story.id]: action.story
+        };
+      const storyList = newState.list.map(id => newState[id]);
+      storyList.push(action.story);
+      newState.list = storyList;
       return newState;
+    }
+    return {
+      ...state,
+      [action.pokemon.id]: {
+        ...state[action.pokemon.id],
+        ...action.pokemon
+      }
+    };
+      
     case REMOVE_STORIES:
-        return newState;
-    case EDIT_STORIES:
         return newState;
     default:
       return state;
