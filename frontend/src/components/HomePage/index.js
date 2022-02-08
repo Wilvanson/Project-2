@@ -1,27 +1,31 @@
-import React, { useEffect} from "react";
+import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getStories } from "../../store/story";
+import { getStories, addStory} from "../../store/story";
 import { NavLink, Redirect} from "react-router-dom";
+import { Modal } from '../../context/Modal';
+import StoryFrom from '../StoryFromPage'
 import './Home.css'
 
 
 function HomePage(){
+    const sessionUser = useSelector(state => state.session.user);
+    const [showModal, setShowModal]= useState(false)
     const story = useSelector(state => {
         return state.story.list;
       });
         
     const dispatch = useDispatch();
-    // console.log(story[0])
 
     useEffect(()=>{
         dispatch(getStories())
       }, [dispatch])
-    if(!story){
-        return(
-            <div>
-                <h2>HELLO</h2>
-            </div>
-    )}
+
+    let control;
+    if(sessionUser){
+        control = sessionUser.id;
+    }
+
+   console.log(showModal)
 
     return (
         <div>
@@ -32,6 +36,16 @@ function HomePage(){
                         <div>
                             <p>{st.title}</p>
                             <p>{st.body}</p>
+                            {st.authorId === control && (
+                                
+                                    <button onClick={() => setShowModal(true)}>EDIT</button>
+                                    
+                            )}
+                            {showModal && (
+                                        <Modal onClose={() => setShowModal(false)}>
+                                            <StoryFrom st={st} />
+                                        </Modal>
+                            )}
                         </div>
                     </NavLink>
                 )
