@@ -1,0 +1,18 @@
+'use strict';
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+   return queryInterface.bulkInsert('Stories', [
+     {authorId: 1, title:'first basketball game', body: 'Some people want it to happen, some wish it would happen, others make it happen. This story is about me and my first basketball game.I was nervous when I got on my first real basketball court,but coach White told me to play and to not think about anything but basketball. We went to play at Cade Middle School it was a very nice school. Once we got there it took us ten minutes to start the game because we had to warm up before we started,But once we started I didnt feel like playing,because I had just seen my mom and I havent seen her for a long time so I didnt know how to feel or think,I saw her at my house before I got to school and I was upset that whole day', createdAt: new Date(), updatedAt: new Date() },
+     {authorId: 2, title:'high school prom', body: 'I was wondering who to ask to my prom when I finally decided to ask a girl I knew only a little. (big high school) She liked to ride horses, and not only did barrel racing, but was also the high school rodeo queen. So I was glad and relieved when she accepted my invitation.She was an attractive girl. Seems like girls that ride horses always have a beautiful butt. In Oklahoma, girls will sometimes have bumper stickers on their cars/pickups saying "Wrangler butts drive me nuts". I can assure you it works both ways. Anyway the prom dance went ok and we got along well.', createdAt: new Date(), updatedAt: new Date() },
+     {authorId: 1, title:'my first child', body: 'I started my own business when I was 24, so Ive always been pretty focused on that.  To be honest, though, I would have dropped it all to have a baby! I had an amazing boyfriend all through my late 20s-early 30s and he just never wanted kids.  Ultimately, it ended up being a deal breaker for me and I had to move on.  I didnt meet another man worthy of being a father until I was 37!', createdAt: new Date(), updatedAt: new Date() },
+     {authorId: 1, title:'lost phone', body: 'Like most Saturday evenings, this one started with a friendly gathering close to my place. A friend of mine recently got his very first office, so the occasion had to be properly celebrated. Of course, we had to be respectable and leave before 10.00pm — the office was in an apartment building and the inhabitants wouldnt be happy about too much noice.At around 1.00am and with a lot of empty bottles left behind we finally embarked on a journey from the new office on to the streets of Sofia. The mood was festive and we successfully reached our destination — one of the local bars we used to go to quite often. All it took was one familiar song associated with a shared memory and we were flapping and jumping around like kids.', createdAt: new Date(), updatedAt: new Date() },
+     {authorId: 3, title:'first apartments', body: 'This fall, I moved into my first apartment. Im twenty-one and have moved from my family home to university residence buildings to room rentals in my neighborhood. And now, finally, my girlfriend and I have a little place to call our own!I go to school at York University in Toronto. And as most of you probably know, Toronto is incredibly expensive. Especially the housing near campus. So I decided to move a little bit on the outskirts of the city and commute to school. Essentially, this move would be a great decision for my finances. ', createdAt: new Date(), updatedAt: new Date() },
+
+    ], {});
+  },
+
+  down: (queryInterface, Sequelize) => {
+   return queryInterface.bulkDelete('Stories', null, {});
+  }
+};

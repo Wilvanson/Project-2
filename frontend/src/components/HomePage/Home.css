@@ -1,0 +1,15 @@
+.story{
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 75%;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.story div{
+
+}
+.fas{
+    size: 130px;
+}
