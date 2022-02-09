@@ -50,5 +50,16 @@ router.get('/', asyncHandler(async function(_req, res) {
       return res.json(story);
     })
   );
+
+  router.delete("/:id", asyncHandler(async function (req, res) {
+    const id = parseInt(req.params.id, 10);
+    await Story.destroy({
+      where: {
+      id
+      }
+     });
+
+    return res.json({ id });
+  }));
   
 module.exports = router;
