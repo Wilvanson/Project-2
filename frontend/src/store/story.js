@@ -63,12 +63,12 @@ export const getStories = () => async dispatch => {
     const response = await csrfFetch(`/api/stories/${story.id}`,{
       method:"PUT",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(title, body)
+      body: JSON.stringify({title, body})
     });
   
     if (response.ok) {
       const story = await response.json();
-      console.log(story)
+      // console.log(story)
       dispatch(addStories(story));
       return story;
     }
@@ -107,21 +107,21 @@ const storyReducer = (state = initialState, action) => {
         list: action.list
       }
     case ADD_STORIES:
-      if (!state[action.story.id]) {
+      if (!state[action.list.id]) {
         const newState = {
           ...state,
-          [action.story.id]: action.story
+          [action.list.id]: action.list
         };
       const storyList = newState.list.map(id => newState[id]);
-      storyList.push(action.story);
+      storyList.push(action.list);
       newState.list = storyList;
       return newState;
     }
     return {
       ...state,
-      [action.pokemon.id]: {
-        ...state[action.pokemon.id],
-        ...action.pokemon
+      [action.list.id]: {
+        ...state[action.list.id],
+        ...action.list
       }
     };
       

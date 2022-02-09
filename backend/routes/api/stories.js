@@ -48,8 +48,8 @@ router.get('/', asyncHandler(async function(_req, res) {
         body
     });
       return res.json(story);
-    })
-  );
+  }));
+  
 
   router.delete("/:id", asyncHandler(async function (req, res) {
     const id = parseInt(req.params.id, 10);
