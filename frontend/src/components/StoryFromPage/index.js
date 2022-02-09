@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editStory } from '../../store/story';
-import { useHistory } from "react-router-dom";
+import { editStory, getStories } from '../../store/story';
+
 
 function StoryFrom({ st, hide}){
     const sessionUser = useSelector(state => state.session.user);
@@ -9,8 +9,10 @@ function StoryFrom({ st, hide}){
     const [body, setBody]= useState(st.body);
     const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
-    const history = useHistory();
-    // console.log(st);
+
+    useEffect(()=>{
+      dispatch(getStories())
+    }, [dispatch])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +24,7 @@ function StoryFrom({ st, hide}){
         }
         console.log(obj)
         dispatch(editStory(obj))
-        history.push('/')
+        hide();
       }
 
     const handleStop=(e)=>{

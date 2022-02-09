@@ -19,12 +19,12 @@ const addStories = list => {
     };
 };
 
-// const removeStories = id => {
-//     return {
-//       type: REMOVE_STORIES,
-//       id
-//     };
-// };
+const removeStories = id => {
+    return {
+      type: REMOVE_STORIES,
+      id
+    };
+};
 
 const oneStory = list => {
     return {
@@ -56,22 +56,14 @@ export const getStories = () => async dispatch => {
       return story;
     }
   };
-
-  // export const getStory = (id) => async dispatch => {
-  //   const response = await csrfFetch(`/api/stories/${id}`);
-  
-  //   if (response.ok) {
-  //     const one = await response.json();
-  //     dispatch(one);
-  //     return one;
-  //   }
-  // };
   
   export const editStory = (story) => async dispatch => {
+    const title = story.title;
+    const body = story.title;
     const response = await csrfFetch(`/api/stories/${story.id}`,{
       method:"PUT",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(story.title, story.body)
+      body: JSON.stringify(title, body)
     });
   
     if (response.ok) {
@@ -79,6 +71,19 @@ export const getStories = () => async dispatch => {
       console.log(story)
       dispatch(addStories(story));
       return story;
+    }
+  };
+
+  export const deleteStory = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/stories/${id}`,{
+      method:"DELETE",
+      headers: {"Content-Type": "application/json"}
+    });
+  
+    if (response.ok) {
+      const id = await response.json();
+      dispatch(removeStories(id));
+      
     }
   };
 
@@ -121,7 +126,9 @@ const storyReducer = (state = initialState, action) => {
     };
       
     case REMOVE_STORIES:
-        return newState;
+      const newState = { ...state };
+      delete newState[action.id];
+      return newState;
     default:
       return state;
   }
