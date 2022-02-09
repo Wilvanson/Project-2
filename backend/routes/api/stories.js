@@ -36,14 +36,19 @@ router.get('/', asyncHandler(async function(_req, res) {
     })
   );
   
-//   router.put(
-//     '/:id',
-//     pokemonValidations.validateUpdate,
-//     asyncHandler(async function (req, res) {
-//       const id = await PokemonRepository.update(req.body);
-//       const pokemon = await PokemonRepository.one(id);
-//       return res.json(pokemon);
-//     })
-//   );
+  router.put('/:id', asyncHandler(async function (req, res) {
+      const id = parseInt(req.params.id, 10);
+      const {title, body} = req.body;
+      const story = await Story.findOne({
+        where: id
+      });
+
+      await story.update({
+        title,
+        body
+    });
+      return res.json(story);
+    })
+  );
   
 module.exports = router;

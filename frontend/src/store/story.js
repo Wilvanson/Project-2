@@ -3,7 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD_STORIES = 'story/loadStories';
 const ADD_STORIES = 'story/addStories';
 const REMOVE_STORIES = 'story/removeStories';
-// const EDIT_STORIES = 'story/editStories';
+const ONE_STORY = 'story/oneStory';
 
 const loadStories = list => {
     return {
@@ -26,12 +26,12 @@ const addStories = list => {
 //     };
 // };
 
-// const editStories = list => {
-//     return {
-//       type: ADD_STORIES,
-//       list
-//     };
-// };
+const oneStory = list => {
+    return {
+      type: ONE_STORY,
+      list
+    };
+};
 
 export const getStories = () => async dispatch => {
     const response = await csrfFetch(`/api/stories`);
@@ -56,16 +56,27 @@ export const getStories = () => async dispatch => {
       return story;
     }
   };
+
+  // export const getStory = (id) => async dispatch => {
+  //   const response = await csrfFetch(`/api/stories/${id}`);
+  
+  //   if (response.ok) {
+  //     const one = await response.json();
+  //     dispatch(one);
+  //     return one;
+  //   }
+  // };
   
   export const editStory = (story) => async dispatch => {
     const response = await csrfFetch(`/api/stories/${story.id}`,{
       method:"PUT",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(story)
+      body: JSON.stringify(story.title, story.body)
     });
   
     if (response.ok) {
       const story = await response.json();
+      console.log(story)
       dispatch(addStories(story));
       return story;
     }
