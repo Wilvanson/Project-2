@@ -29,23 +29,23 @@ function HomePage(){
         <div>
             {story.map((st)=>{
                 return (
-                    <div>
+                    <div key={st.id}>
 
                         <i className="fas fa-user-circle" />
                         <div>
-                            <NavLink to={`/login`} key={st.id}>{st.title}</NavLink>
+                            <NavLink to={`/stories/${st.id}`} key={st.id}>{st.title}</NavLink>
                             <p>{st.body}</p>
-                            {st.authorId === control && (
+                            {/* {st.authorId === control && (
                                     
                                 <button onClick={() => setShowModal(true)}>EDIT</button>
                                         
-                            )}
+                            )} */}
                         </div>
-                        {showModal && (
+                        {/* {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
                                 <StoryFrom st={st} hide={()=> setShowModal(false)} />
                             </Modal>
-                        )}
+                        )} */}
                     </div>
                 )
             })}

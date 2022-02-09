@@ -6,6 +6,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage"
+import Story_Detail from "./components/Story_details";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
       <Switch>
         <Route path='/' exact>
           <HomePage />
+        </Route>
+        <Route path='/stories/:id'>
+          <Story_Detail />
         </Route>
       </Switch>
     </>
