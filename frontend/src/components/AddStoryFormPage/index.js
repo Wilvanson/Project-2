@@ -1,16 +1,18 @@
 import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editStory, getStories } from '../../store/story';
+import { addStory, getStories } from '../../store/story';
+import { useHistory } from "react-router-dom";
 
 
-function StoryFrom({ st, hide}){
+function AddFrom({ hide}){
     const sessionUser = useSelector(state => state.session.user);
-    const [title, setTitle]= useState(st.title);
-    const [body, setBody]= useState(st.body);
+    const [title, setTitle]= useState( '');
+    const [body, setBody]= useState('');
     const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
-    let form = 'EDIT';
-    
+    const history = useHistory();
+    let form = 'ADD';
+   
     useEffect(()=>{
       dispatch(getStories())
     }, [dispatch])
@@ -18,14 +20,16 @@ function StoryFrom({ st, hide}){
     const handleSubmit = async(e) => {
         e.preventDefault();
         setErrors([]);
+        
+          let authorId = sessionUser.id;
           const obj = {
-              ...st,
-              title,
-              body
+            authorId,
+            title,
+            body
           }
-          console.log(obj)
-          await dispatch(editStory(obj))
+          const newStory = await dispatch(addStory(obj))
         hide();
+        history.push('/')
       }
 
     const handleStop=(e)=>{
@@ -66,4 +70,4 @@ function StoryFrom({ st, hide}){
     )
 }
 
-export default StoryFrom;
+export default AddFrom;

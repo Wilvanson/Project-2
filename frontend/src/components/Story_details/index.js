@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStories } from '../../store/story';
 import { useParams } from "react-router-dom";
 import { Modal } from '../../context/Modal';
-import StoryFrom from '../StoryFromPage'
+import StoryFrom from '../StoryFromPage';
 import DeleteFrom from "../DeleteFormPage";
 import './story.css'
 
