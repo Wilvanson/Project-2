@@ -13,9 +13,7 @@ function AddFrom({ hide}){
     const history = useHistory();
     let form = 'ADD';
    
-    useEffect(()=>{
-      dispatch(getStories())
-    }, [dispatch])
+   
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -29,7 +27,7 @@ function AddFrom({ hide}){
           }
           const newStory = await dispatch(addStory(obj))
         hide();
-        history.push('/')
+        // history.push('/')
       }
 
     const handleStop=(e)=>{

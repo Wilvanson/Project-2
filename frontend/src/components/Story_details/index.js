@@ -36,7 +36,7 @@ function Story_Detail(){
       <div>
           <p>{story.title}</p>
           <p>{story.body}</p>
-          {story.id === control&&(
+          {story.authorId === control&&(
             <div>
               <button onClick={() => setShowModal(true)}>EDIT</button>
               <button onClick={() => setDeleteForm(true)}>DELETE</button>
