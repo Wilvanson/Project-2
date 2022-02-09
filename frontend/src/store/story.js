@@ -3,7 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD_STORIES = 'story/loadStories';
 const ADD_STORIES = 'story/addStories';
 const REMOVE_STORIES = 'story/removeStories';
-const ONE_STORY = 'story/oneStory';
+const EDIT_STORY = 'story/editStory';
 
 const loadStories = list => {
     return {
@@ -26,9 +26,9 @@ const removeStories = id => {
     };
 };
 
-const oneStory = list => {
+const edit_Story = list => {
     return {
-      type: ONE_STORY,
+      type: EDIT_STORY,
       list
     };
 };
@@ -68,8 +68,8 @@ export const getStories = () => async dispatch => {
   
     if (response.ok) {
       const story = await response.json();
-      // console.log(story)
-      dispatch(addStories(story));
+      console.log(story)
+      dispatch(edit_Story(story));
       return story;
     }
   };
@@ -106,29 +106,38 @@ const storyReducer = (state = initialState, action) => {
         ...state,
         list: action.list
       }
-    case ADD_STORIES:
-      if (!state[action.list.id]) {
-        const newState = {
+      case ADD_STORIES:
+        const newList = [...state.list];
+        newList.push(action.list);
+    
+        return {
+            ...state,
+            [action.list.id] : {
+              ...action.list
+            },
+            list: newList
+          };
+      case EDIT_STORY:
+        let newState = [...state.list];
+        let body = action.list.body;
+        let title = action.list.title;
+        const obj = {
+          ...action.list,
+          body,
+          title
+        }
+        newState[action.list.id] = obj;
+        return {
           ...state,
-          [action.list.id]: action.list
+          [action.list.id] : {
+            ...action.list
+          },
+          list: newState
         };
-      const storyList = newState.list.map(id => newState[id]);
-      storyList.push(action.list);
-      newState.list = storyList;
-      return newState;
-    }
-    return {
-      ...state,
-      [action.list.id]: {
-        ...state[action.list.id],
-        ...action.list
-      }
-    };
-      
     case REMOVE_STORIES:
-      const newState = { ...state };
-      delete newState[action.id];
-      return newState;
+      const newStates = { ...state };
+      delete newStates[action.id];
+      return newStates;
     default:
       return state;
   }
