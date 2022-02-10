@@ -85,5 +85,16 @@ router.get('/', asyncHandler(async function(_req, res) {
     return res.json(comment);
   })
 );
+
+router.delete("/:id/comments/:commentId", asyncHandler(async function (req, res) {
+  const {id} = req.body;
+  await comments.destroy({
+    where: {
+    id
+    }
+   });
+
+  return res.json({ id });
+}));
   
 module.exports = router;

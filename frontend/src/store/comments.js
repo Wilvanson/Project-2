@@ -2,7 +2,7 @@ import { csrfFetch } from './csrf';
 
 const LOAD_COMMENT = 'story/loadComment';
 const ADD_COMMENT = 'story/addComment';
-
+const REMOVE_COMMENT = 'story/removeComment';
 
 const addComments = list => {
     return {
@@ -15,6 +15,13 @@ const addComments = list => {
     return {
       type: LOAD_COMMENT,
       list
+    };
+};
+
+const removeComment = id => {
+    return {
+      type: REMOVE_COMMENT,
+      id
     };
 };
 
@@ -39,6 +46,21 @@ const addComments = list => {
       //console.log(comment) // look at this first
       dispatch(addComments(comment));
       return comment;
+    }
+  };
+
+  export const deleteComment = (comment) => async dispatch => {
+      const id = comment.id;
+    const response = await csrfFetch(`/api/stories/${comment.storyId}/comments/:commentId`,{
+      method:"DELETE",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(id)
+    });
+  
+    if (response.ok) {
+      const id = await response.json();
+      dispatch(removeComment(id));
+      
     }
   };
 
@@ -70,6 +92,10 @@ const addComments = list => {
               },
               list: newList
             };
+        case REMOVE_COMMENT:
+            const newStates = { ...state };
+            delete newStates[action.id];
+            return newStates;
       default:
         return state;
     }

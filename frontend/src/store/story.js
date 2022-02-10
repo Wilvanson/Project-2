@@ -71,7 +71,6 @@ export const getStories = () => async dispatch => {
   
     if (response.ok) {
       const story = await response.json();
-      console.log(story)
       dispatch(edit_Story(story));
       return story;
     }

@@ -16,7 +16,6 @@ function HomePage(){
         return state.story.list;
       });
 
-      console.log(story)
     useEffect(async()=>{
         await dispatch(getStories())
       }, [dispatch])

@@ -19,9 +19,8 @@ function CommentFrom({ st, hide}){
             storyId,
             body
         }
-        console.log(obj);
+        
         dispatch(addComment(obj))
-        // history.push('/')
         hide();
       }
 
