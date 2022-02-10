@@ -12,8 +12,9 @@ function DeleteCommentFrom({ comment, hide}){
     const handleSubmit = async(e) => {
         e.preventDefault();
         await dispatch(deleteComment(comment))
-        // history.push('/')
         hide()
+        history.push(`/stories/${id}`)
+        // history.push('/')
       }
 
     const handleStop=(e)=>{

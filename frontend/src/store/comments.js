@@ -59,7 +59,8 @@ const removeComment = id => {
   
     if (response.ok) {
       const ids = await response.json();
-      dispatch(removeComment(ids));
+      console.log('ids from thub',ids)
+      dispatch(removeComment(ids.id));
       
     }
   };
