@@ -5,6 +5,7 @@ const ADD_STORIES = 'story/addStories';
 const REMOVE_STORIES = 'story/removeStories';
 const EDIT_STORY = 'story/editStory';
 
+
 const loadStories = list => {
     return {
       type: LOAD_STORIES,
@@ -32,6 +33,8 @@ const edit_Story = list => {
       list
     };
 };
+
+
 
 export const getStories = () => async dispatch => {
     const response = await csrfFetch(`/api/stories`);
@@ -86,6 +89,7 @@ export const getStories = () => async dispatch => {
       
     }
   };
+
 
 
   const initialState = {
