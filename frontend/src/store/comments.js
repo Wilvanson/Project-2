@@ -54,12 +54,12 @@ const removeComment = id => {
     const response = await csrfFetch(`/api/stories/${comment.storyId}/comments/:commentId`,{
       method:"DELETE",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(id)
+      body: JSON.stringify({id})
     });
   
     if (response.ok) {
-      const id = await response.json();
-      dispatch(removeComment(id));
+      const ids = await response.json();
+      dispatch(removeComment(ids));
       
     }
   };
