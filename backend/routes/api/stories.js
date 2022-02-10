@@ -19,6 +19,13 @@ const addingValidations = [
   handleValidationErrors
 ];
 
+const addingCommentValidations = [
+  check('body')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a Body.'),
+  handleValidationErrors
+];
+
 
 router.get('/', asyncHandler(async function(_req, res) {
     const stories = await Story.findAll();
@@ -61,5 +68,22 @@ router.get('/', asyncHandler(async function(_req, res) {
 
     return res.json({ id });
   }));
+
+  router.get('/comments', asyncHandler(async function(_req, res) {
+    const comment = await comments.findAll();
+    return res.json(comment);
+  }));
+
+
+  router.post( '/:id/comments', addingCommentValidations, asyncHandler(async function (req, res) {
+    const {userId, storyId, body}= req.body;
+    const comment = await comments.create({
+      userId,
+      storyId,
+      body
+    });
+    return res.json(comment);
+  })
+);
   
 module.exports = router;
