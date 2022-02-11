@@ -62,7 +62,7 @@ export const getStories = () => async dispatch => {
   
   export const editStory = (story) => async dispatch => {
     const title = story.title;
-    const body = story.title;
+    const body = story.body;
     const response = await csrfFetch(`/api/stories/${story.id}`,{
       method:"PUT",
       headers: {"Content-Type": "application/json"},
@@ -138,8 +138,10 @@ const storyReducer = (state = initialState, action) => {
           list: newState
         };
     case REMOVE_STORIES:
-      const newStates = { ...state };
+      let newStates = { ...state, list:[...state.list] };
+      let arr = newStates.list.filter(ele => ele.id !== action.id)
       delete newStates[action.id];
+      newStates.list = arr;
       return newStates;
     default:
       return state;
