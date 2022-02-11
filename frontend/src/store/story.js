@@ -138,8 +138,10 @@ const storyReducer = (state = initialState, action) => {
           list: newState
         };
     case REMOVE_STORIES:
-      const newStates = { ...state };
+      let newStates = { ...state, list:[...state.list] };
+      let arr = newStates.list.filter(ele => ele.id !== action.id)
       delete newStates[action.id];
+      newStates.list = arr;
       return newStates;
     default:
       return state;

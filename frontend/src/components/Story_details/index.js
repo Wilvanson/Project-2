@@ -9,6 +9,7 @@ import { getComments } from "../../store/comments";
 import CommentFrom from "../AddCommentPage";
 import DeleteCommentFrom from "../DeleteCommentForm";
 import './story.css'
+import EditFrom from "../EditCommentPage";
 
 
 function Story_Detail(){
@@ -20,6 +21,7 @@ function Story_Detail(){
     const [showModal, setShowModal]= useState(false);
     const [deleteForm, setDeleteForm] = useState(false);
     const [comment, setComment] = useState(false);
+    const [edit, setEdit] = useState(false);
     const [deleteCommentForm, setDeleteCommentForm] = useState(false);
     const [value, setvalue] = useState();
 
@@ -73,9 +75,15 @@ function Story_Detail(){
                     <div key={co.id}>
                       <p>{co.body}</p>
                       {co.userId === control &&(
-                        <button onClick={(e) => {
-                            setvalue(co)
-                            return setDeleteCommentForm(true)}}>DELETE</button>
+                          <div>
+                            <button onClick={(e) => {
+                                setvalue(co)
+                                return setEdit(true)}}>EDIT</button>
+                            <button onClick={(e) => {
+                                  setvalue(co)
+                                  return setDeleteCommentForm(true)}}>DELETE</button>
+                          </div>
+                            
                       )}
                     </div>
                 )
@@ -89,6 +97,11 @@ function Story_Detail(){
       {deleteCommentForm && (
         <Modal onClose={() => setDeleteCommentForm(false)}>
             <DeleteCommentFrom comment={value} hide={()=> setDeleteCommentForm(false)} />
+        </Modal>
+        )}
+        {edit && (
+        <Modal onClose={() => setEdit(false)}>
+            <EditFrom comment={value} hide={()=> setEdit(false)} />
         </Modal>
         )}
   </div>

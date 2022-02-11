@@ -86,6 +86,18 @@ router.get('/', asyncHandler(async function(_req, res) {
   })
 );
 
+router.put('/:id/comments/:commentId', asyncHandler(async function (req, res) {
+  const {id, body} = req.body;
+  const comment = await comments.findOne({
+    where: id
+  });
+
+  await comment.update({
+    body
+});
+  return res.json(comment);
+}));
+
 router.delete("/:id/comments/:commentId", asyncHandler(async function (req, res) {
   const {id} = req.body;
   await comments.destroy({
