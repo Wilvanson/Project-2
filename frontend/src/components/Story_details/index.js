@@ -69,7 +69,9 @@ function Story_Detail(){
       )}
       <div>
         <h2>Comments</h2>
-        <button onClick={() => setComment(true)}>ADD A COMMENT</button>
+        {sessionUser && (
+            <button onClick={() => setComment(true)}>ADD A COMMENT</button>
+        )}
         {comments.map((co)=>{
                 return (
                     <div key={co.id}>
