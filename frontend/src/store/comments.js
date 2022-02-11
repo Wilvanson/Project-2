@@ -51,7 +51,7 @@ const edit_Comment = list => {
   
     if (response.ok) {
       const comment = await response.json();
-      //console.log(comment) // look at this first
+
       dispatch(addComments(comment));
       return comment;
     }
@@ -68,7 +68,7 @@ const edit_Comment = list => {
   
     if (response.ok) {
       const comment = await response.json();
-    //   console.log(comment)
+    
       dispatch(edit_Comment(comment));
       return comment;
     }
@@ -84,7 +84,7 @@ const edit_Comment = list => {
   
     if (response.ok) {
       const ids = await response.json();
-      console.log('ids from thub',ids)
+      
       dispatch(removeComment(ids.id));
       
     }
@@ -126,12 +126,20 @@ const edit_Comment = list => {
               body
             }
             newState[action.list.id] = obj;
+
+            let oldList = state.list;
+            let update = oldList.map(obj =>{
+                if(obj.id === action.list.id){
+                    return action.list
+                }
+                return obj;
+            })
             return {
               ...state,
               [action.list.id] : {
                 ...action.list
               },
-              list: newState
+              list: update
             };
         case REMOVE_COMMENT:
             let newStates = { ...state, list:[...state.list] };

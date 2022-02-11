@@ -23,7 +23,7 @@ function StoryFrom({ st, hide}){
               title,
               body
           }
-          // console.log(obj)
+          
           await dispatch(editStory(obj))
         hide();
       }

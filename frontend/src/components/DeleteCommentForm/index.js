@@ -8,7 +8,7 @@ function DeleteCommentFrom({ comment, hide}){
     const { id } = useParams(); 
     const dispatch = useDispatch();
     const history = useHistory();
-    console.log(comment)
+    
     const handleSubmit = async(e) => {
         e.preventDefault();
         await dispatch(deleteComment(comment))
