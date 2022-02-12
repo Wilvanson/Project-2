@@ -21,19 +21,24 @@ function HomePage(){
       }, [dispatch])
 
     return (
-        <div>
+        <div className="page">
             <button onClick={() => setShow(true)}>ADD STORY</button>
+            <div className="whole">
+
             {story.map((st)=>{
                 return (
                     <div key={st.id}>
-                        <i className="fas fa-user-circle" />
-                        <div>
-                            <NavLink to={`/stories/${st.id}`} key={st.id}>{st.title}</NavLink>
+                        {/* <i className="fas fa-user-circle" /> */}
+                        <div className="story">
+                            <NavLink to={`/stories/${st.id}`} key={st.id} >
+                                <h2 className="links">{st.title}</h2>
+                            </NavLink>
                             <p>{st.body}</p>
                         </div>
                     </div>
                 )
             })}
+            </div>
             {show && (
                 <Modal onClose={() => setShow(false)}>
                     <AddFrom hide={()=> setShow(false)} />

@@ -46,9 +46,8 @@ function Story_Detail(){
     return (
       <div key={story.id}>
 
-      <i className="fas fa-user-circle" />
-      <div>
-          <p>{story.title}</p>
+      <div className="storys">
+          <p className="links">{story.title}</p>
           <p>{story.body}</p>
           {story.authorId === control&&(
             <div>
@@ -67,7 +66,7 @@ function Story_Detail(){
               <DeleteFrom story={story} hide={()=> setDeleteForm(false)} />
           </Modal>
       )}
-      <div>
+      <div className="pages">
         <h2>Comments</h2>
         {sessionUser && (
             <button onClick={() => setComment(true)}>ADD A COMMENT</button>

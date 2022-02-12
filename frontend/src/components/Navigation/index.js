@@ -19,8 +19,12 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink to="/login">
+        <button className='home-img3'>Login</button>
+        </NavLink>
+        <NavLink to="/signup">
+          <button className='home-img3'>Sign-Up</button>
+        </NavLink>
       </>
     );
   }
@@ -28,7 +32,12 @@ function Navigation({ isLoaded }){
   return (
     <ul>
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/">
+          <img src = "https://freeiconshop.com/wp-content/uploads/edd/book-flat.png" className='home-img' alt = "home-img"/>
+        </NavLink>
+      </li>
+      <li>
+        <h2>TELL US YOUR STORY</h2>
       </li>
       <li >
         {isLoaded && sessionLinks}

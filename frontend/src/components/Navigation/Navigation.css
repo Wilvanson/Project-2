@@ -13,18 +13,33 @@ ul li{
     display: inline-block;
     padding: 0px 20px;
     list-style: none;
+    align-items: center;
 }
 
 ul{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 10%;
 }
 
-ul button{
+/* ul button{
     padding: 5px 15px;
     background-color: blue;
     border: none;
+} */
+
+.home-img{
+    height: 75px;
+    width: 75px;
+}
+
+.home-img3{
+    height: 35px;
+    width: 100px;
+    border-radius: 3rem;
+    background-color: rgb(46, 45, 45);
+    color: white;
+    margin-left: 10px;
+    border: 0;
 }
 
