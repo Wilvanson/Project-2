@@ -61,8 +61,8 @@ function AddFrom({ hide}){
               required
             />
           </label>
-          <button type="submit">Done</button>
-          <button onClick={handleStop}>Cancel</button>
+          <button type="submit" className="b">Done</button>
+          <button onClick={handleStop} className="b">Cancel</button>
         </form>
     </div>
     )

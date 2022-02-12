@@ -50,7 +50,7 @@ function Story_Detail(){
           <p className="links">{story.title}</p>
           <p>{story.body}</p>
           {story.authorId === control&&(
-            <div>
+            <div className="buut">
               <button onClick={() => setShowModal(true) }>EDIT</button>
               <button onClick={() => setDeleteForm(true)}>DELETE</button>
             </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComment } from "../../store/comments"
 import { useHistory, useParams } from "react-router-dom";
+import "./delete.css"
 
 function DeleteCommentFrom({ comment, hide}){
     const sessionUser = useSelector(state => state.session.user);
@@ -24,7 +25,7 @@ function DeleteCommentFrom({ comment, hide}){
     return (
         <div>
       <h1>DELETE</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="delete">
         <button type="submit">YES</button>
         <button onClick={handleStop}>NO</button>
       </form>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editStory, getStories } from '../../store/story';
-
+import "./edit-story.css";
 
 function StoryFrom({ st, hide}){
     const sessionUser = useSelector(state => state.session.user);
@@ -35,12 +35,11 @@ function StoryFrom({ st, hide}){
     return (
         <div>
         <h1>{form}</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="forms">
           <ul>
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </ul>
-          <label>
-            Title
+          <p className="ladd"> Title: </p>
             <input
               id='title'
               type="text"
@@ -48,19 +47,17 @@ function StoryFrom({ st, hide}){
               onChange={(e) => setTitle(e.target.value)}
               required
             />
-          </label>
-          <label>
-            Body
-            <input
+          <p className="ladd">Body:</p>
+            <textarea
               id='body'
               type="text"
               value={body}
               onChange={(e) => setBody(e.target.value)}
               required
             />
-          </label>
-          <button type="submit">Done</button>
-          <button onClick={handleStop}>Cancel</button>
+
+          <button type="submit" className="b">Done</button>
+          <button onClick={handleStop} className="b">Cancel</button>
         </form>
     </div>
     )

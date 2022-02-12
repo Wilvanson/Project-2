@@ -37,18 +37,17 @@ function EditFrom({ comment, hide}){
           <ul>
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </ul>
-          <label>
-            Body
-            <input
+          <p  className="ladd">Body:</p>
+            <textarea
               id='body'
               type="text"
               value={body}
               onChange={(e) => setBody(e.target.value)}
               required
             />
-          </label>
-          <button type="submit">Done</button>
-          <button onClick={handleStop}>Cancel</button>
+          
+          <button type="submit" className="b">Done</button>
+          <button onClick={handleStop} className="b">Cancel</button>
         </form>
     </div>
     )

@@ -41,8 +41,8 @@ function CommentFrom({ st, hide}){
             required
           />
         </label>
-        <button type="submit">DONE</button>
-        <button onClick={handleStop}>CANCEL</button>
+        <button type="submit" className="b">DONE</button>
+        <button onClick={handleStop} className="b">CANCEL</button>
       </form>
     </div>
     )

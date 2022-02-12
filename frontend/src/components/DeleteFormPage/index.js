@@ -22,7 +22,7 @@ function DeleteFrom({ st, hide}){
     return (
         <div>
       <h1>DELETE</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="delete">
         <button type="submit">YES</button>
         <button onClick={handleStop}>NO</button>
       </form>
