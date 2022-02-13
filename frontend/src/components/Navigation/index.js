@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch} from 'react-redux';
 import * as sessionActions from '../../store/session';
 import ProfileButton from './ProfileButton';
@@ -38,6 +38,11 @@ function Navigation({ isLoaded }){
       </li>
       <li>
         <h2>TELL US YOUR STORY</h2>
+      </li>
+      <li>
+        <a href="https://github.com/Wilvanson" target="_blank">
+          GitHub
+        </a>
       </li>
       <li >
         {isLoaded && sessionLinks}
