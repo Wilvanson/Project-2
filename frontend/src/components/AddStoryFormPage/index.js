@@ -41,8 +41,8 @@ function AddFrom({ hide}){
           <ul>
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </ul>
-          <label>
-            Title
+          <p className="ladd">Title:</p>
+            
             <input
               id='title'
               type="text"
@@ -50,17 +50,15 @@ function AddFrom({ hide}){
               onChange={(e) => setTitle(e.target.value)}
               required
             />
-          </label>
-          <label>
-            Body
-            <input
+          <p className="ladd">Body:</p>
+            
+            <textarea
               id='body'
               type="text"
               value={body}
               onChange={(e) => setBody(e.target.value)}
               required
             />
-          </label>
           <button type="submit" className="b">Done</button>
           <button onClick={handleStop} className="b">Cancel</button>
         </form>

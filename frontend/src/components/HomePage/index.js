@@ -22,7 +22,9 @@ function HomePage(){
 
     return (
         <div className="page">
-            <button onClick={() => setShow(true)}>ADD STORY</button>
+            {sessionUser && (
+                <button onClick={() => setShow(true)}>ADD STORY</button>
+            )}
             <div className="whole">
 
             {story.map((st)=>{
