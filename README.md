@@ -1,4 +1,4 @@
-# Project-2
+# MiddleGround
 1. Clone the repo
 
         git@github.com:Wilvanson/Project-2.git
